@@ -2250,7 +2250,7 @@ TABLES = {
                     return_value TEXT,
                     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     update_time TIMESTAMP,
-	                CONSTRAINT LIGHTRAG_LLM_CACHE_PK PRIMARY KEY (workspace, mode, id)
+	                CONSTRAINT LIGHTRAG_LLM_CACHE_PK PRIMARY KEY (workspace, id)
                     )"""
     },
     "LIGHTRAG_DOC_STATUS": {
@@ -2304,7 +2304,7 @@ SQL_TEMPLATES = {
                        """,
     "upsert_llm_response_cache": """INSERT INTO LIGHTRAG_LLM_CACHE(workspace,id,original_prompt,return_value,mode)
                                       VALUES ($1, $2, $3, $4, $5)
-                                      ON CONFLICT (workspace,mode,id) DO UPDATE
+                                      ON CONFLICT (workspace,id) DO UPDATE
                                       SET original_prompt = EXCLUDED.original_prompt,
                                       return_value=EXCLUDED.return_value,
                                       mode=EXCLUDED.mode,
